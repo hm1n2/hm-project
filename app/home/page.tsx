@@ -98,6 +98,8 @@ const NAV_ITEMS = [
 export default function HomePage() {
   const [viewState, setViewState] = useState<ViewState>("default");
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
+  const [heartAnim, setHeartAnim] = useState<string | null>(null);
+  const [pressedCard, setPressedCard] = useState<string | null>(null);
 
   function toggleBookmark(id: string, e: React.MouseEvent) {
     e.preventDefault();
@@ -106,6 +108,10 @@ export default function HomePage() {
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
+    if (!bookmarks.has(id)) {
+      setHeartAnim(id);
+      setTimeout(() => setHeartAnim(null), 320);
+    }
   }
 
   return (
@@ -116,8 +122,8 @@ export default function HomePage() {
         style={{ height: "56px", borderBottom: "1px solid #f3f3f3" }}
       >
         <span
-          className="text-[20px] font-bold text-primary"
-          style={{ letterSpacing: "-0.5px" }}
+          className="text-[21px] font-[800] text-primary tracking-[-0.5px]"
+          style={{ fontFamily: "var(--font-paperozi)" }}
         >
           TRADDY
         </span>
@@ -132,16 +138,23 @@ export default function HomePage() {
       {/* Mockup state switcher */}
       <div
         className="fixed z-10 left-1/2 -translate-x-1/2 w-full max-w-[420px] flex items-center gap-1 px-4"
-        style={{ top: "56px", height: "38px", background: "#f9f9f9", borderBottom: "1px solid #eeeeee" }}
+        style={{
+          top: "56px",
+          height: "38px",
+          background: "#f9f9f9",
+          borderBottom: "1px solid #eeeeee",
+        }}
       >
-        <span className="text-[10px] font-medium mr-1" style={{ color: "#c2c2c2" }}>MOCKUP</span>
+        <span className="text-[10px] font-medium mr-1" style={{ color: "#c2c2c2" }}>
+          MOCKUP
+        </span>
         {(["default", "empty", "loading", "error"] as ViewState[]).map((s) => (
           <button
             key={s}
             onClick={() => setViewState(s)}
             className="flex-1 text-[11px] font-medium rounded h-[22px]"
             style={{
-              background: viewState === s ? "#eb2b51" : "#ffffff",
+              background: viewState === s ? "#1ec7be" : "#ffffff",
               color: viewState === s ? "#ffffff" : "#999999",
               border: "1px solid #e5e5e5",
             }}
@@ -151,188 +164,185 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Scrollable content area */}
-      <main
-        className="flex-1 overflow-y-auto"
-        style={{ paddingTop: "94px", paddingBottom: "68px" }}
-      >
-      <div className="max-w-[420px] mx-auto px-4">
-        {viewState === "default" && (
-          <>
-            <p className="text-[14px] text-subdued pt-3 pb-4">
-              오늘 저녁, 마레 근처에 맞는 동행이에요
-            </p>
-            <div className="flex flex-col gap-3">
-              {FEED_CARDS.map((card) => (
-                <Link
-                  key={card.id}
-                  href={`/companion/${card.id}`}
-                  className="block rounded-[8px] p-4 bg-white"
-                  style={{ border: "1px solid #e5e5e5" }}
-                >
-                  {/* Card header */}
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      {/* Avatar */}
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-semibold text-white flex-shrink-0"
-                        style={{ background: card.type === "recruit" ? "#1ec7be" : "#eb2b51" }}
-                      >
-                        {card.name[0]}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          {card.type === "recruit" && (
-                            <span
-                              className="text-[11px] font-medium px-1.5 py-0.5 rounded"
-                              style={{ background: "rgba(30,199,190,0.1)", color: "#1ec7be" }}
-                            >
-                              모집중
-                            </span>
-                          )}
-                          <span className="text-[15px] font-semibold text-body">{card.name}</span>
-                          <span className="text-[14px] text-muted">{card.age}</span>
-                          {card.verified && (
-                            <span
-                              className="flex items-center gap-0.5 text-[11px] font-medium"
-                              style={{ color: "#1ec7be" }}
-                            >
-                              <CheckCircle size={12} />
-                              인증완료
-                            </span>
+      {/* Content */}
+      <main className="flex-1 overflow-y-auto" style={{ paddingTop: "94px", paddingBottom: "68px" }}>
+        <div className="max-w-[420px] mx-auto px-4">
+
+          {viewState === "default" && (
+            <>
+              <p className="text-[14px] text-subdued pt-3 pb-4">
+                오늘 저녁, 마레 근처에 맞는 동행이에요
+              </p>
+              <div className="flex flex-col gap-3">
+                {FEED_CARDS.map((card) => (
+                  <Link
+                    key={card.id}
+                    href={`/companion/${card.id}`}
+                    className="block rounded-[8px] p-4 bg-white"
+                    style={{
+                      border: "1px solid #e5e5e5",
+                      transform: pressedCard === card.id ? "scale(0.985)" : "scale(1)",
+                      transition: "transform 100ms ease",
+                    }}
+                    onMouseDown={() => setPressedCard(card.id)}
+                    onMouseUp={() => setPressedCard(null)}
+                    onMouseLeave={() => setPressedCard(null)}
+                    onTouchStart={() => setPressedCard(card.id)}
+                    onTouchEnd={() => setPressedCard(null)}
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        {/* Avatar */}
+                        <div
+                          className="w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-semibold text-white flex-shrink-0"
+                          style={{ background: card.type === "recruit" ? "#1ec7be" : "#ff3c78" }}
+                        >
+                          {card.name[0]}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            {card.type === "recruit" && (
+                              <span
+                                className="text-[11px] font-medium px-1.5 py-0.5 rounded"
+                                style={{ background: "rgba(30,199,190,0.1)", color: "#1ec7be" }}
+                              >
+                                모집중
+                              </span>
+                            )}
+                            <span className="text-[15px] font-semibold text-body">{card.name}</span>
+                            <span className="text-[14px] text-muted">{card.age}</span>
+                            {card.verified && (
+                              <span
+                                className="flex items-center gap-0.5 text-[11px] font-medium"
+                                style={{ color: "#1ec7be" }}
+                              >
+                                <CheckCircle size={12} />
+                                인증완료
+                              </span>
+                            )}
+                          </div>
+                          {card.reviewCount > 0 && (
+                            <p className="text-[12px] text-muted mt-0.5">
+                              후기 {card.reviewScore} ({card.reviewCount}개)
+                            </p>
                           )}
                         </div>
-                        {card.reviewCount > 0 && (
-                          <p className="text-[12px] text-muted mt-0.5">
-                            후기 {card.reviewScore} ({card.reviewCount}개)
-                          </p>
-                        )}
                       </div>
+
+                      {/* Bookmark */}
+                      <button
+                        onClick={(e) => toggleBookmark(card.id, e)}
+                        aria-label={bookmarks.has(card.id) ? "찜 해제" : "찜하기"}
+                        className={`p-1 -mr-1 flex-shrink-0 ${heartAnim === card.id ? "heart-pop" : ""}`}
+                      >
+                        <Heart
+                          size={20}
+                          fill={bookmarks.has(card.id) ? "#ff3c78" : "none"}
+                          stroke={bookmarks.has(card.id) ? "#ff3c78" : "#cccccc"}
+                        />
+                      </button>
                     </div>
 
-                    {/* Bookmark */}
-                    <button
-                      onClick={(e) => toggleBookmark(card.id, e)}
-                      aria-label={bookmarks.has(card.id) ? "찜 해제" : "찜하기"}
-                      className="p-1 -mr-1 flex-shrink-0"
-                    >
-                      <Heart
-                        size={20}
-                        fill={bookmarks.has(card.id) ? "#eb2b51" : "none"}
-                        stroke={bookmarks.has(card.id) ? "#eb2b51" : "#cccccc"}
-                      />
-                    </button>
-                  </div>
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {card.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[12px] font-medium px-2 py-0.5 rounded-full"
+                          style={{ background: "#f3f3f3", color: "#666666" }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-3">
-                    {card.tags.map((tag) => (
+                    {/* Quote */}
+                    <p className="mt-2.5 text-[14px] text-body font-medium">
+                      &ldquo;{card.quote}&rdquo;
+                    </p>
+
+                    {/* Reason label */}
+                    <div className="mt-2 flex items-center justify-between">
                       <span
-                        key={tag}
-                        className="text-[12px] font-medium px-2 py-0.5 rounded-full"
-                        style={{ background: "#f3f3f3", color: "#666666" }}
+                        className="text-[12px] font-medium px-2 py-0.5 rounded"
+                        style={{ background: "rgba(30,199,190,0.08)", color: "#1ec7be" }}
                       >
-                        {tag}
+                        {card.reason}
                       </span>
-                    ))}
-                  </div>
+                      {card.type === "recruit" && (
+                        <span className="text-[12px] text-muted">
+                          {(card as RecruitCard).currentCount}/{(card as RecruitCard).maxCount}명
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
 
-                  {/* Quote */}
-                  <p className="mt-2.5 text-[14px] text-body font-medium">
-                    &ldquo;{card.quote}&rdquo;
-                  </p>
+          {viewState === "empty" && (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
+                style={{ background: "#f3f3f3" }}
+              >
+                <Users size={28} style={{ color: "#c2c2c2" }} />
+              </div>
+              <p className="text-[15px] text-muted mb-1">아직 딱 맞는 동행은 안 보이네요</p>
+              <p className="text-[14px] mb-7" style={{ color: "#bbbbbb" }}>
+                비슷한 루트부터 가볍게 둘러볼 수 있어요
+              </p>
+              <button
+                className="flex items-center justify-center px-6 text-[15px] font-semibold text-white rounded-[6px]"
+                style={{ height: "40px", background: "#ff3c78" }}
+              >
+                둘러볼 수 있어요
+              </button>
+            </div>
+          )}
 
-                  {/* Reason label + count */}
-                  <div className="mt-2 flex items-center justify-between">
-                    <span
-                      className="text-[12px] font-medium px-2 py-0.5 rounded"
-                      style={{ background: "rgba(235,43,81,0.07)", color: "#eb2b51" }}
-                    >
-                      {card.reason}
-                    </span>
-                    {card.type === "recruit" && (
-                      <span className="text-[12px] text-muted">
-                        {(card as RecruitCard).currentCount}/{(card as RecruitCard).maxCount}명
-                      </span>
-                    )}
+          {viewState === "loading" && (
+            <div className="flex flex-col gap-3 pt-3">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="rounded-[8px] p-4 animate-pulse"
+                  style={{ border: "1px solid #e5e5e5" }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-surface flex-shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 rounded bg-surface w-28" />
+                      <div className="h-3 rounded bg-surface w-20" />
+                    </div>
                   </div>
-                </Link>
+                  <div className="flex gap-1.5 mt-3">
+                    <div className="h-5 rounded-full bg-surface w-20" />
+                    <div className="h-5 rounded-full bg-surface w-14" />
+                  </div>
+                  <div className="h-4 rounded bg-surface w-44 mt-3" />
+                  <div className="h-5 rounded bg-surface w-28 mt-2" />
+                </div>
               ))}
             </div>
-          </>
-        )}
+          )}
 
-        {viewState === "empty" && (
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div
-              className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
-              style={{ background: "#f3f3f3" }}
-            >
-              <Users size={28} style={{ color: "#c2c2c2" }} />
-            </div>
-            <p className="text-[15px] text-muted mb-1">
-              아직 딱 맞는 동행은 안 보이네요
-            </p>
-            <p className="text-[14px] mb-7" style={{ color: "#bbbbbb" }}>
-              비슷한 루트부터 가볍게 둘러볼 수 있어요
-            </p>
-            <button
-              className="flex items-center justify-center px-6 text-[15px] font-semibold text-white rounded-[6px]"
-              style={{ height: "40px", background: "#17181a" }}
-            >
-              둘러볼 수 있어요
-            </button>
-          </div>
-        )}
-
-        {viewState === "loading" && (
-          <div className="flex flex-col gap-3 pt-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-[8px] p-4 animate-pulse"
-                style={{ border: "1px solid #e5e5e5" }}
+          {viewState === "error" && (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <p className="text-[15px] text-body font-medium mb-1.5">잠시 연결이 흔들렸어요</p>
+              <p className="text-[14px] text-subdued mb-7">한 번만 다시 불러올게요</p>
+              <button
+                className="flex items-center gap-2 px-5 text-[15px] font-medium rounded-[6px]"
+                style={{ height: "40px", color: "#1ec7be", border: "1px solid #1ec7be" }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-surface flex-shrink-0" />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-4 rounded bg-surface w-28" />
-                    <div className="h-3 rounded bg-surface w-20" />
-                  </div>
-                </div>
-                <div className="flex gap-1.5 mt-3">
-                  <div className="h-5 rounded-full bg-surface w-20" />
-                  <div className="h-5 rounded-full bg-surface w-14" />
-                </div>
-                <div className="h-4 rounded bg-surface w-44 mt-3" />
-                <div className="h-5 rounded bg-surface w-28 mt-2" />
-              </div>
-            ))}
-          </div>
-        )}
+                <RotateCcw size={16} />
+                다시 시도
+              </button>
+            </div>
+          )}
 
-        {viewState === "error" && (
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <p className="text-[15px] text-body font-medium mb-1.5">
-              잠시 연결이 흔들렸어요
-            </p>
-            <p className="text-[14px] text-subdued mb-7">
-              한 번만 다시 불러올게요
-            </p>
-            <button
-              className="flex items-center gap-2 px-5 text-[15px] font-medium rounded-[6px]"
-              style={{
-                height: "40px",
-                color: "#1ec7be",
-                border: "1px solid #1ec7be",
-              }}
-            >
-              <RotateCcw size={16} />
-              다시 시도
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
       </main>
 
       {/* Bottom Navigation */}
@@ -349,14 +359,14 @@ export default function HomePage() {
             {isCreate ? (
               <div
                 className="w-9 h-9 rounded-full flex items-center justify-center"
-                style={{ background: "#eb2b51" }}
+                style={{ background: "#1ec7be" }}
               >
                 <Icon size={18} color="#ffffff" />
               </div>
             ) : (
               <>
-                <Icon size={22} color={active ? "#eb2b51" : "#999999"} />
-                <span className="text-[10px] mt-0.5" style={{ color: active ? "#eb2b51" : "#999999" }}>
+                <Icon size={22} color={active ? "#1ec7be" : "#999999"} />
+                <span className="text-[10px] mt-0.5" style={{ color: active ? "#1ec7be" : "#999999" }}>
                   {label}
                 </span>
               </>

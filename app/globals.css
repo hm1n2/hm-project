@@ -1,15 +1,40 @@
 @import "tailwindcss";
 
+/* ── Paperozi display font (Paperlogy CDN) ── */
+@font-face {
+  font-family: "Paperozi";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2309@1.0/Paperlogy-6SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperozi";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2309@1.0/Paperlogy-8ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
 @theme {
-  --color-primary: #eb2b51;
+  /* Brand */
+  --color-primary: #1ec7be;
   --color-hot-pink: #ff3c78;
-  --color-mint: #1ec7be;
+  --color-sky-mint: #1dc3ff;
+  --color-canary: #ffd84d;
+
+  /* Surfaces */
   --color-surface: #f3f3f3;
   --color-dark: #17181a;
+
+  /* Text */
   --color-body: #323232;
   --color-muted: #999999;
   --color-subdued: #666666;
+
+  /* Status */
   --color-danger: #ef4343;
+
+  /* Fonts */
+  --font-paperozi: "Paperozi", "Pretendard Variable", "Pretendard", sans-serif;
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system,
     BlinkMacSystemFont, "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
 }
@@ -19,4 +44,52 @@ body {
   color: #323232;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Drawer animations ── */
+@keyframes drawer-in {
+  0%   { transform: translateY(100%); }
+  60%  { transform: translateY(-10px); }
+  78%  { transform: translateY(4px); }
+  92%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes drawer-out {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(8%) scale(0.99); }
+  100% { transform: translateY(110%) scale(0.97); }
+}
+
+@keyframes scrim-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scrim-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Chip pop on select ── */
+@keyframes chip-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.92); }
+  72%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ── Heart pop on bookmark ── */
+@keyframes heart-pop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.35); }
+  65%  { transform: scale(0.88); }
+  100% { transform: scale(1); }
+}
+
+.chip-pop {
+  animation: chip-pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.heart-pop {
+  animation: heart-pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }

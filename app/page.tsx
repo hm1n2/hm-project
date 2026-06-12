@@ -5,10 +5,10 @@ export default function WelcomePage() {
     <div className="min-h-screen flex items-center justify-center bg-white px-6">
       <div className="w-full max-w-[420px] flex flex-col items-center">
         {/* Logo */}
-        <div className="mb-12">
+        <div className="mb-10">
           <span
-            className="text-[36px] font-bold text-primary"
-            style={{ letterSpacing: "-0.5px" }}
+            className="text-[38px] font-[800] tracking-[-1px] text-primary"
+            style={{ fontFamily: "var(--font-paperozi)" }}
           >
             TRADDY
           </span>
@@ -17,8 +17,8 @@ export default function WelcomePage() {
         {/* Headline */}
         <div className="text-center mb-10 space-y-3">
           <h1
-            className="text-[22px] font-semibold leading-[1.55] text-dark"
-            style={{ letterSpacing: "-0.3px" }}
+            className="text-[24px] font-[700] leading-[1.5] text-dark tracking-[-0.4px]"
+            style={{ fontFamily: "var(--font-paperozi)" }}
           >
             혼자 떠난 여행도,
             <br />
@@ -37,7 +37,7 @@ export default function WelcomePage() {
         <div className="w-full flex flex-col items-center gap-5">
           <Link
             href="/setup"
-            className="w-full flex items-center justify-center h-[50px] bg-primary text-white text-[16px] font-semibold rounded-[8px] transition-opacity hover:opacity-90"
+            className="w-full flex items-center justify-center h-[50px] bg-primary text-white text-[16px] font-semibold rounded-[8px] transition-opacity active:opacity-80"
           >
             내 일정으로 추천받기
           </Link>
