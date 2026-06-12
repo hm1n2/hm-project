@@ -4,7 +4,7 @@ name: "TRADDY"
 country: KR
 category: travel
 homepage: "https://traddy.app"
-primary_color: "#eb2b51"
+primary_color: "#1ec7be"
 logo:
   type: text
   slug: "TRADDY"
@@ -12,15 +12,16 @@ verified: "2026-06-12"
 omd: "0.1"
 runtime_deps:
   icons: lucide-react
-  fonts: [Pretendard]
+  fonts: [Paperozi, Pretendard]
 tokens:
   source: prose-derived
   extracted: "2026-06-12"
   colors:
-    primary: "#eb2b51"
+    primary: "#1ec7be"
     hot-pink: "#ff3c78"
     mint: "#1ec7be"
     mint-sky: "#1dc3ff"
+    canary: "#ffd84d"
     purple: "#6456dc"
     canvas: "#0e1011"
     surface-1: "#17181a"
@@ -36,7 +37,7 @@ tokens:
     border-subtle: "#d5d5d5"
     error: "#ef4343"
   typography:
-    family: { sans: "Pretendard", mono: "Pretendard" }
+    family: { display: "Paperozi", sans: "Pretendard", mono: "Pretendard" }
     discount: { size: 27, weight: 700, lineHeight: 1.35, use: "Discount price, coupon amount" }
     confirm:  { size: 18, weight: 500, lineHeight: 1.4, use: "Full-width confirm button" }
     button:   { size: 16, weight: 600, lineHeight: 1.4, use: "Primary button label" }
@@ -46,13 +47,13 @@ tokens:
   spacing: { xs: 4, sm: 8, md: 12, base: 16, lg: 24, xl: 32, section: 56 }
   rounded: { sm: 4, md: 6, lg: 8, full: 9999 }
   components:
-    button-primary: { type: button, bg: "#eb2b51", fg: "#ffffff", radius: "8px", font: "16px / 600", use: "Primary CTA for join, request, or continue flows; 50px height" }
-    button-confirm: { type: button, bg: "#eb2b51", fg: "#ffffff", radius: "8px", font: "18px / 500", use: "Full-width drawer-bottom confirm for final intent actions; 56px height" }
+    button-primary: { type: button, bg: "#1ec7be", fg: "#ffffff", radius: "8px", font: "16px / 600", use: "Primary CTA for join, request, or continue flows; 50px height" }
+    button-confirm: { type: button, bg: "#1ec7be", fg: "#ffffff", radius: "8px", font: "18px / 500", use: "Full-width drawer-bottom confirm for final intent actions; 56px height" }
     button-secondary: { type: button, bg: "#323232", fg: "#ffffff", radius: "4px", font: "14px / 500", use: "Inline secondary action for save, later, or route detail; 34px height" }
     button-outline: { type: button, bg: "#ffffff", fg: "#323232", radius: "4px", font: "14px / 500", use: "Outline cancel, close, or skip; 1px #e5e5e5 border, 34px height" }
-    button-discovery: { type: button, bg: "#17181a", fg: "#ffffff", radius: "6px", font: "15px / 600", use: "Short discovery CTA for browsing nearby plans or profiles; 40px height" }
-    card-coupon: { type: card, bg: "#fff5f8", fg: "#eb2b51", font: "27px / 700", use: "Highlight card for today's route, host note, or matching summary" }
-    nudge-urgency: { type: toast, bg: "rgba(30,199,190,0.10)", fg: "#1ec7be", radius: "4px", font: "14px / 500", use: "Gentle timing nudge for limited meetup windows or soon-closing plans; 38px height" }
+    button-discovery: { type: button, bg: "#ff3c78", fg: "#ffffff", radius: "6px", font: "15px / 600", use: "Short discovery CTA for browsing nearby plans or profiles; 40px height" }
+    card-coupon: { type: card, bg: "#eefcfb", fg: "#1ec7be", font: "27px / 700", use: "Highlight card for today's route, host note, or matching summary" }
+    nudge-urgency: { type: toast, bg: "rgba(255,216,77,0.18)", fg: "#9a7a00", radius: "4px", font: "14px / 500", use: "Gentle timing nudge for limited meetup windows or soon-closing plans; 38px height" }
   components_harvested: true
 ---
 
@@ -60,15 +61,15 @@ TRADDY is a mobile-first travel companion service for solo travelers who want to
 
 ## 1. Visual Theme & Atmosphere
 
-TRADDY uses a bright-first visual world where the primary stage is white and breathable, allowing a solo traveler to feel calm before making any social decision. The root canvas should read as open, clean, and easy to scan, with lively accents arriving in controlled doses rather than flooding the screen. Rose-red (#eb2b51) is the confident invitation color for key commitment actions. Hot-pink (#ff3c78) brings the playful spark of possibility, while mint accents (#1ec7be, #1dc3ff) add freshness, trust, and travel-light clarity to discovery moments, route cues, and active presence states. Purple (#6456dc) may remain only as a minor supporting note if needed, but it should not compete with the pink-mint pairing. Dark neutrals still exist, but they act as contrast tools for compact actions, bottom navigation, and emphasis surfaces rather than as the default environment. Typography stays in Pretendard for familiar Korean readability, while the compact 4–8 px radius scale keeps the interface grounded and trustworthy even when the accent colors feel lively.
+TRADDY uses a bright-first visual world where the primary stage is white and breathable, allowing a solo traveler to feel calm before making any social decision. The root canvas should read as open, clean, and easy to scan, with lively accents arriving in controlled doses rather than flooding the screen. Mint (#1ec7be) is the lead brand color: it carries the product's trust, freshness, and light-footed travel energy across key actions and orientation cues. Hot-pink (#ff3c78) adds emotional lift and a friendly spark of possibility, while sky-mint blue (#1dc3ff) supports discovery, route freshness, and airy presence moments. A canary yellow accent (#ffd84d) may appear in small doses for timely highlights, celebratory nudges, or attention cues that should feel cheerful rather than urgent. Purple (#6456dc) is no longer a core part of the palette and should be treated as optional legacy contrast only. Dark neutrals still exist, but they act as contrast tools for compact actions, bottom navigation, and emphasis surfaces rather than as the default environment. Typography splits deliberately: Paperozi is used for titles and expressive headlines, while Pretendard remains the body typeface for readable Korean UI copy. The compact 4–8 px radius scale keeps the interface grounded and trustworthy even when the accent colors feel lively.
 
 ## 2. Color Palette & Roles
 
-- **Primary Rose-Red:** `#eb2b51` — primary CTA buttons, join/continue actions, highlighted confirmation states
-- **Primary Hot-Pink:** `#ff3c78` — lighter affordance color for profile accents, route chips, selected filters, and optimistic highlights
-- **Secondary Mint:** `#1ec7be` — freshness cues, route guidance, trust accents, and lightweight informational emphasis
-- **Mint-Sky Accent:** `#1dc3ff` — airy companion tone for gradients, nearby discovery, and active presence highlights
-- **Supporting Purple:** `#6456dc` — optional tertiary note only for rare depth contrast; never a dominant accent
+- **Primary Mint:** `#1ec7be` — primary CTA buttons, trust anchors, join/continue actions, highlighted confirmation states
+- **Secondary Hot-Pink:** `#ff3c78` — playful lift for discovery CTA, profile accents, selected filters, and optimistic highlights
+- **Secondary Sky-Mint:** `#1dc3ff` — airy companion tone for route cues, nearby discovery, and active presence highlights
+- **Point Canary Yellow:** `#ffd84d` — small celebratory highlights, timely nudges, badges, or notice accents
+- **Supporting Purple:** `#6456dc` — optional legacy contrast only; avoid introducing it into new UI unless absolutely needed
 - **App Background:** `#ffffff` — root app canvas (default across the main product)
 - **Surface Dark-1:** `#17181a` — bottom navigation bar background, dark compact action surfaces
 - **Surface Dark-2:** `#222327` — elevated dark utility surfaces when stronger contrast is needed
@@ -84,16 +85,19 @@ TRADDY uses a bright-first visual world where the primary stage is white and bre
 - **Error / Danger:** `#ef4343` — error banners, failed requests, ended availability labels
 - **Connection ring:** `conic-gradient(from -68deg, #ff2b51, #ffae8e)` — energetic accent ring for active people and highlighted social moments
 - **Route ring:** `conic-gradient(from -68deg, #1ec7be, #1dc3ff)` — freshness-forward gradient for nearby routes, discovery, and host emphasis
+- **Notice accent:** `#ffd84d` — tiny status sparks, featured markers, or event badges used in moderation
 
 ## 3. Typography Rules
 
-- **Typeface:** Pretendard (woff2, variable weight 45–920), with Pretendard Fallback (Arial-based) for system fallback
+- **Display typeface:** Paperozi via custom `@font-face` declarations mapped to the provided Paperlogy CDN files, weights 100–900; use for titles, hero copy, section headlines, and short branded emphasis only
+- **Body typeface:** Pretendard (woff2, variable weight 45–920), with Pretendard Fallback (Arial-based) for system fallback; use for body copy, captions, labels, buttons, forms, and all dense UI text
 - **Body / Product name:** 15px / weight 400–500
 - **Price / Emphasis:** 15px / weight 700; discount price 27px / weight 700
 - **Button primary:** 16px / weight 600
 - **Button confirm full-width:** 18px / weight 500
 - **Caption / Meta:** 13px / weight 400–500
 - **Badge / Tag:** 11–12px / weight 500
+- **Title usage:** Paperozi 600–800 for short headings; avoid long paragraphs or compact UI labels in Paperozi
 - **Page header height:** 56px (CSS export constant)
 - **Letter spacing:** −0.2 px to −0.5 px on headings and price figures; Korean text benefits from tight negative tracking
 - **Line height:** 135–145% for readable body, tabular-nums variant for prices and timers
@@ -103,14 +107,14 @@ TRADDY uses a bright-first visual world where the primary stage is white and bre
 ### Primary Actions
 
 **Primary CTA (join / request / continue)**
-- Background: `#eb2b51`
+- Background: `#1ec7be`
 - Text: `#ffffff`
 - Radius: 8px
 - Height: 50px
 - Font: 16px / 600
 
 **Full-Width Confirm (drawer bottom)**
-- Background: `#eb2b51`
+- Background: `#1ec7be`
 - Text: `#ffffff`
 - Height: 56px
 - Font: 18px / 500
@@ -131,7 +135,7 @@ TRADDY uses a bright-first visual world where the primary stage is white and bre
 - Font: 14px / 500
 
 **Discovery CTA**
-- Background: `#17181a`
+- Background: `#ff3c78`
 - Text: `#ffffff`
 - Radius: 6px
 - Height: 40px
@@ -143,8 +147,8 @@ TRADDY uses a bright-first visual world where the primary stage is white and bre
 
 **Active Highlight**
 - Background: `#ffffff`
-- Background: `#fff5f8`
-- Text (emphasis): `#eb2b51`
+- Background: `#eefcfb`
+- Text (emphasis): `#1ec7be`
 - Font: 27px / 700
 
 **Completed / Inactive Highlight**
@@ -158,14 +162,14 @@ TRADDY uses a bright-first visual world where the primary stage is white and bre
 ### Timing Nudge Bar
 
 **Limited-Time Window**
-- Background: `rgba(30, 199, 190, 0.10)`
-- Text: `#1ec7be`
+- Background: `rgba(255, 216, 77, 0.18)`
+- Text: `#9a7a00`
 - Radius: 4px
 - Height: 38px
 - Font: 14px / 500–600
 
 ---
-**Transformation note:** Visual energy, color values, spacing, and component metrics were retained from the reference system, while the default canvas was intentionally repositioned to white to match the desired bright app atmosphere for TRADDY.
+**Transformation note:** Visual energy, spacing, and component metrics were retained from the reference system, while the palette hierarchy was rebalanced to mint-first with pink, sky, and canary accents for TRADDY.
 **Brandfit note:** Voice, role naming, and UI examples were rewritten from `docs/brandvoice.md` on 2026-06-12. Voice samples remain planning-stage copy, not production-validated messaging.
 
 ## 5. Layout Principles
@@ -180,16 +184,18 @@ The UI relies on background-color contrast rather than heavy drop shadows for la
 
 ### Do
 - Use `#ffffff` as the default app stage so the product feels open, calm, and easy to scan
-- Use `#eb2b51` for primary commitment actions such as joining, requesting, or confirming a plan
-- Use hot-pink for emotional lift and mint for freshness, trust, and route guidance
+- Use `#1ec7be` for primary commitment actions such as joining, requesting, or confirming a plan
+- Use hot-pink for emotional lift, sky-mint for route freshness, and canary yellow only for small cheerful attention cues
 - Keep body copy at 15px / 400 on light surfaces for readability at arm's length
-- Let mint nudges feel supportive and airy rather than alarming
+- Let canary nudges feel bright and friendly rather than alarming
 - Maintain the 420px max-width constraint in desktop contexts to preserve mobile layout fidelity
 
 ### Don't
 - Don't use dark backgrounds as the default app canvas; keep them as contrast surfaces only
-- Don't use `#ff3c78` as the primary CTA color — it is the lighter playful accent, not the final commitment signal
-- Don't let purple overtake the palette; if used at all, it stays tertiary
+- Don't use `#ff3c78` as the primary CTA color — it is the playful secondary accent, not the final commitment signal
+- Don't use Paperozi for body paragraphs, long labels, or compact controls
+- Don't let yellow spread into large surfaces; it works best as a quick point of attention
+- Don't let purple overtake the palette; if used at all, it stays tertiary or legacy-only
 - Don't add shadows to buttons; elevation is communicated through surface contrast and outline structure
 - Don't place gradient rings on every avatar or card; reserve them for active or highlighted moments
 - Don't exceed 8px border-radius on purchase buttons; 24–31px is reserved for pill tags and avatar-adjacent elements
@@ -203,11 +209,12 @@ TRADDY is deliberately mobile-first rather than broadly responsive. The root `.m
 
 To produce TRADDY-consistent UI:
 - Bright canvas: `background #ffffff`, body text `#323232`, Pretendard 15px/400
-- Primary CTA: `background #eb2b51`, white text, 8px radius, 50px height, 16px/600
+- Title system: Paperozi for headlines and branded emphasis, Pretendard for all body and UI text
+- Primary CTA: `background #1ec7be`, white text, 8px radius, 50px height, 16px/600
 - Secondary action: `background #323232`, white text, 4px radius, 34px height, 14px/500
-- Discovery accent: use `#ff3c78` for playful lift and `#1ec7be` / `#1dc3ff` for fresh route and presence cues
-- Timing nudge bar: `rgba(30,199,190,0.10)` background, `#1ec7be` text, 4px radius, 38px height
-- Highlight card: `#fff5f8` tint interior with rose-red emphasis, 27px/700 for strong numbers or route markers
+- Discovery accent: use `#ff3c78` for playful lift and `#1dc3ff` for fresh route and presence cues
+- Timing nudge bar: `rgba(255,216,77,0.18)` background, `#9a7a00` text, 4px radius, 38px height
+- Highlight card: `#eefcfb` tint interior with mint emphasis, 27px/700 for strong numbers or route markers
 - Section dividers: 1px solid `#f3f3f3`
 - No box-shadow on action elements; rely on background contrast, outlines, and spacing for layering
 
@@ -235,7 +242,7 @@ To produce TRADDY-consistent UI:
 
 3. **Trust is visual before it is verbal.** A bright canvas, readable spacing, and restrained accents should reduce anxiety before copy does. UI implication: white space, subtle dividers, and tidy card structure are part of the trust model.
 
-4. **Energy belongs in highlights.** Playful color should show up in moments of discovery, active presence, and positive momentum, not as a constant wall of stimulation. UI implication: keep hot-pink and gradients sparse so they stay meaningful.
+4. **Energy belongs in highlights.** Playful color should show up in moments of discovery, active presence, and positive momentum, not as a constant wall of stimulation. UI implication: keep hot-pink, sky accents, and canary cues sparse so they stay meaningful.
 
 5. **Mobile-first, always.** The product is designed for on-the-go decisions during travel. UI implication: the 420px max-width is a design constraint, not a limitation — all interaction models should stay thumb-native and easy to scan quickly.
 
